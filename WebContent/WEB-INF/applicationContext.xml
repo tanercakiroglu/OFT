@@ -1,0 +1,59 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"	
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="com.oft.service" /> 
+
+
+	<!-- Definition for getProduct bean without constructor-arg -->
+<!-- 	<bean id="BaseJdbcDAO" class="com.oft.dao.BaseJdbcDAO"> -->
+<!-- 	</bean> -->
+
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
+		<property name="username" value="taner" />
+		<property name="password" value="taner1" />
+	</bean>
+	
+	   <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="namedParameterJdbcTemplate"
+          class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg index="0" ref="dataSource" />
+    </bean>
+
+	<bean id="userDAO" class="com.oft.dao.daoImpl.UserDAO">
+	</bean>
+	<bean id="user" class="com.oft.pojo.User">
+	</bean>
+	<bean id="getUser" class="com.oft.service.GetUser">
+	</bean>
+
+	<aop:aspectj-autoproxy />
+	<!-- Custom Aspect -->
+	<bean id="pointcutMgr" class="com.oft.aspect.logger.LogManager" />
+	<bean id="logInterceptor" class="com.oft.aspect.logger.LogInterceptor" />
+
+	
+	
+	
+
+</beans>
