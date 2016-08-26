@@ -15,10 +15,6 @@
 	http://www.springframework.org/schema/context 
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-
-	
-
-	<aop:aspectj-autoproxy />
 	<context:component-scan base-package="com.oft.service" /> 
 
 
@@ -51,6 +47,7 @@
 	<bean id="getUser" class="com.oft.service.GetUser">
 	</bean>
 
+	<aop:aspectj-autoproxy />
 	<!-- Custom Aspect -->
 	<bean id="pointcutMgr" class="com.oft.aspect.logger.LogManager" />
 	<bean id="logInterceptor" class="com.oft.aspect.logger.LogInterceptor" />

@@ -49,15 +49,15 @@
 	</appender>
 
 	<logger name="com.oft.aspect.logger" level="debug" additivity="false">
-		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE-THREAD" />
 	</logger>
 
 	<logger name="org.springframework" level="debug" additivity="false">
-		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE-THREAD" />
 	</logger>
 
 	<logger name="com.oft.service" level="debug" additivity="false">
-		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE-THREAD" />
 	</logger>
 
 	<root level="error">
