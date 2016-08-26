@@ -2,7 +2,9 @@ package com.oft.pojo;
 
 import java.io.Serializable;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable {
 
 	/**
