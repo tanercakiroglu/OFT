@@ -27,14 +27,14 @@ public class Util {
      */
     public static JSONObject constructJSON(String tag, boolean status,Object response) {
         JSONObject obj = new JSONObject();
+        Gson gson = new Gson();
         try {
+        	String json = gson.toJson(response);
             obj.put("tag", tag);
             obj.put("status", new Boolean(status));
-            Gson gson = new Gson();
-            String json = gson.toJson(response);
             obj.put("response", json);
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
+        	obj=null;
         }
         return obj;
     }
@@ -47,14 +47,16 @@ public class Util {
      * @param err_msg
      * @return
      */
-    public static JSONObject constructJSON(String tag, boolean status,String err_msg) {
+    public static JSONObject constructJSON(String tag,Object err_msg,boolean status) {
         JSONObject obj = new JSONObject();
+        Gson gson = new Gson();
         try {
+        	String json = gson.toJson(err_msg);
             obj.put("tag", tag);
             obj.put("status", new Boolean(status));
-            obj.put("error_msg", err_msg);
+            obj.put("error_msg", json);
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
+           obj=null;
         }
         return obj;
     }

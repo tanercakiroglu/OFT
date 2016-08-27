@@ -47,9 +47,10 @@
 
 	<aop:aspectj-autoproxy />
 	<!-- Custom Aspect -->
-	<bean id="pointcutMgr" class="com.oft.aspect.logger.LogManager" />
+	<bean id="pointcutMgrLogger" class="com.oft.aspect.logger.LogManager" />
 	<bean id="logInterceptor" class="com.oft.aspect.logger.LogInterceptor" />
-
+	<bean id="pointcutMgrExceptionHandler" class="com.oft.aspect.exceptionHandling.ExceptionManager" />
+	<bean id="exceptionInterceptor" class="com.oft.aspect.exceptionHandling.ExceptionInterceptor" />
 	
 	
 	
