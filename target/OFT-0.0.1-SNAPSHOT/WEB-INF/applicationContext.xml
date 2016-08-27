@@ -40,12 +40,11 @@
         <constructor-arg index="0" ref="dataSource" />
     </bean>
 
-	<bean id="userDAO" class="com.oft.dao.daoImpl.UserDAO">
-	</bean>
-	<bean id="user" class="com.oft.pojo.User">
-	</bean>
-	<bean id="getUser" class="com.oft.service.GetUser">
-	</bean>
+	<bean id="userDAO" class="com.oft.dao.daoImpl.UserDAO"/>
+	<bean id="menuDAO" class="com.oft.dao.daoImpl.MenuDAO"/>
+	<bean id="user" class="com.oft.pojo.User"/>
+	<bean id="getUser" class="com.oft.service.GetUser"/>
+	
 
 	<aop:aspectj-autoproxy />
 	<!-- Custom Aspect -->
