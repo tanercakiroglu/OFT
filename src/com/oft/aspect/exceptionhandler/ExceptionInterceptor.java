@@ -1,4 +1,4 @@
-package com.oft.aspect.exceptionHandling;
+package com.oft.aspect.exceptionhandler;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -10,8 +10,8 @@ import com.oft.util.Util;
 public class ExceptionInterceptor {
 
 	
-	@Around(value = "com.oft.aspect.exceptionHandling.ExceptionManager.handleExcepiton()" + "&& target(bean) "
-			+ "&& @annotation(com.oft.aspect.exceptionHandling.HandleException)" + "&& @annotation(handleExcpetion)", argNames = "bean,handleExcpetion")
+	@Around(value = "com.oft.aspect.exceptionhandler.ExceptionManager.handleExcepiton()" + "&& target(bean) "
+			+ "&& @annotation(com.oft.aspect.exceptionhandler.HandleException)" + "&& @annotation(handleExcpetion)", argNames = "bean,handleExcpetion")
 	public Object handleExcpetion(ProceedingJoinPoint joinPoint, Object bean,HandleException handleExcpetion) throws Throwable {
 		
 		Object ret = null;

@@ -1,4 +1,4 @@
-package com.oft.aspect.exceptionHandling;
+package com.oft.aspect.exceptionhandler;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;

@@ -7,7 +7,7 @@ import java.util.List;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.oft.aspect.exceptionHandling.HandleException;
+import com.oft.aspect.exceptionhandler.HandleException;
 import com.oft.dao.BaseJdbcDAO;
 import com.oft.dao.idao.IMenuDAO;
 import com.oft.pojo.Menu;

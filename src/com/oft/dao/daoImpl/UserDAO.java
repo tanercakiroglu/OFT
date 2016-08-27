@@ -9,7 +9,7 @@ import java.util.Map;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.jdbc.core.RowMapper;
 
-import com.oft.aspect.exceptionHandling.HandleException;
+import com.oft.aspect.exceptionhandler.HandleException;
 import com.oft.dao.BaseJdbcDAO;
 import com.oft.dao.idao.IUserDAO;
 import com.oft.pojo.User;

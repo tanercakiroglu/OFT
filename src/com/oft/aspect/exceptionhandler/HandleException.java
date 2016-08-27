@@ -1,4 +1,4 @@
-package com.oft.aspect.exceptionHandling;
+package com.oft.aspect.exceptionhandler;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
