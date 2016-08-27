@@ -16,7 +16,7 @@
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<context:component-scan base-package="com.oft.service" /> 
-
+	<context:component-scan base-package="com.oft.configuration" />
 
 	<!-- Definition for getProduct bean without constructor-arg -->
 <!-- 	<bean id="BaseJdbcDAO" class="com.oft.dao.BaseJdbcDAO"> -->

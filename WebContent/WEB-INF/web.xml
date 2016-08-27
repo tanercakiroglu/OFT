@@ -23,6 +23,12 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	<listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.filter.DelegatingFilterProxy</listener-class>
+    </listener> 
 
 	<servlet>
 		<servlet-name>jersey-serlvet</servlet-name>
@@ -37,8 +43,14 @@
 			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
 			<param-value>true</param-value>
 		</init-param>
+		<init-param>
+            <param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
+            <param-value>com.oft.configuration.ApplicationRequestFilter</param-value>
+        </init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+
+      
 
 	<servlet-mapping>
 		<servlet-name>jersey-serlvet</servlet-name>
