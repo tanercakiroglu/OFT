@@ -10,7 +10,7 @@ public class ApplicationRequestFilter  implements ContainerRequestFilter{
 
 	@Context
 	private HttpServletRequest servletRequest;
-	
+
 	@Override
 	public ContainerRequest filter(ContainerRequest request) {
 		
