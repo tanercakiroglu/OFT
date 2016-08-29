@@ -85,7 +85,7 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 	@Override
 	public List<MenuPojo> getOrder(int roomNO) {
 	
-		String query = "SELECT DISTINCT oft.item_count, me.ITEM_NAME_EN,  me.ITEM_NAME,  me.PRICE_IN_DOLAR,  me.PRICE_IN_YTL,  me.PRICE_IN_EURO,"+
+		String query = "SELECT  oft.item_count, me.ITEM_NAME_EN,  me.ITEM_NAME,  me.PRICE_IN_DOLAR,  me.PRICE_IN_YTL,  me.PRICE_IN_EURO,"+
       "me.DESCRIPTION,  me.DESCRIPTION_EN FROM OFT_ORDER o,  menu me,  oft_order_detail oft WHERE oft.ORDER_ID=o.ID and oft.order_id = (SELECT id FROM oft_order WHERE room_no=:roomNO AND session_status=:sessionStatus )"+
       "AND me.ID=oft.ITEM_ID";
 		Map<String,Object> parameters= new HashMap<String, Object>();
