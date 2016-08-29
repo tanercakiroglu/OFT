@@ -7,6 +7,14 @@ public class Menu {
 	
 	
 	
+	public String getID() {
+		return ID;
+	}
+
+	public void setID(String iD) {
+		ID = iD;
+	}
+
 	public String getDescEN() {
 		return descEN;
 	}
@@ -86,6 +94,8 @@ public class Menu {
 	private double priceUSD ;
 	
 	private double priceEUR ;
+	
+	private String ID;
 	
 
 }

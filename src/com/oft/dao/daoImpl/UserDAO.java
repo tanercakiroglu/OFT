@@ -43,8 +43,8 @@ public class UserDAO extends BaseJdbcDAO implements IUserDAO {
 		namedParameters.put("lastName", user.getLastName());
 		namedParameters.put("userName", user.getUserName());
 		namedParameters.put("password", user.getPassword());
-				
-		return Util.constructJSON(Constants.USER_SERVICE_GET_USER_DAO_ALIAS, true, namedParameterJdbcTemplate.update(query, namedParameters));
+		int isRowAffected=namedParameterJdbcTemplate.update(query, namedParameters);		
+		return Util.constructJSON(Constants.USER_SERVICE_GET_USER_DAO_ALIAS, true,isRowAffected);
 
 	}
 
