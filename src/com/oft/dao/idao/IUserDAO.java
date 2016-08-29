@@ -1,15 +1,15 @@
 package com.oft.dao.idao;
 
-import org.codehaus.jettison.json.JSONObject;
+import java.util.List;
 
 import com.oft.excpetion.BusinessException;
-import com.oft.pojo.User;
+import com.oft.pojo.UserPojo;
 
 
 public interface IUserDAO {
 
-	JSONObject login(String username,String password) throws BusinessException;
+	List<UserPojo> login(String username,String password) throws BusinessException;
 	
-	JSONObject register(User user);
+	int register(UserPojo user)throws BusinessException ;
  
 }

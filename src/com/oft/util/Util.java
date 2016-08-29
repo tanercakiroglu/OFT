@@ -13,9 +13,9 @@ public class Util {
      * @param txt
      * @return
      */
-    public static boolean isNotNull(String txt) {
+    public static boolean isNotNullOREmpty(String txt) {
         // System.out.println("Inside isNotNull");
-        return txt != null && txt.trim().length() >= 0 ? true : false;
+        return txt != null && txt.trim().length() > 0 ? true : false;
     }
  
     /**

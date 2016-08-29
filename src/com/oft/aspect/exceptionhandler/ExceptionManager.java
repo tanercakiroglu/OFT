@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ExceptionManager {
 
-	@Pointcut("execution(* com.oft.dao..*(..))")
+	@Pointcut("execution(* com.oft.service..*(..))")
     public void handleExcepiton() {}
 
     

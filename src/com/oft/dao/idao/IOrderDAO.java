@@ -4,11 +4,19 @@ import java.util.List;
 
 import org.codehaus.jettison.json.JSONObject;
 
-import com.oft.pojo.Order;
+import com.oft.excpetion.BusinessException;
+import com.oft.pojo.MenuPojo;
+import com.oft.pojo.OrderPojo;
 
 public interface IOrderDAO {
 
-	public JSONObject addOrder(List<Order> orderList);
-	public JSONObject deleteOrder(int itemID,int roomID);
-	public JSONObject getOrder(int roomNO);
+	
+	int addOrderDetail(List<OrderPojo> orderList, String orderID);
+	int deleteOrderDetail(int itemID,String orderID);
+	int controlDeleteCount(int itemID,String orderID);
+	int decreaseItemCount(int itemID,String orderID);
+	List<MenuPojo> getOrder(int roomNO);
+	JSONObject closeOrder(int roomNO);
+	OrderPojo controlExistingOpenOrder(int roomNO) throws BusinessException ;
+	int addOrder(int roomNO);
 }

@@ -1,9 +1,11 @@
 package com.oft.dao.idao;
 
-import org.codehaus.jettison.json.JSONObject;
+import java.util.List;
+
+import com.oft.pojo.MenuPojo;
 
 public interface IMenuDAO {
 
-	JSONObject getMenu();
-	JSONObject getSubmenu(int submenuID);
+	List<MenuPojo> getMenu();
+	List<MenuPojo> getSubmenu(int submenuID);
 }

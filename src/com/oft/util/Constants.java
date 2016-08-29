@@ -9,5 +9,8 @@ public class Constants {
 	public final static String USER_SERVICE_GET_USER_DAO_ALIAS="/USERDAO/GETUSER";
 	public final static String ORDER_SERVICE_GET_ORDER_DAO_ALIAS="/ORDERDAO/GETORDER";
 	public final static String LOGIN_FAILED="Login failed.You are not registered to our system. ";
+	public final static String INVALID_PARAMETERS="Invalid paramaters.";
+	public final static String DELETE_BUSSINES_EXCEPTION="No valid order to delete";
+	
 	
 }
