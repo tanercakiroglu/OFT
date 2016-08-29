@@ -5,4 +5,5 @@ import org.codehaus.jettison.json.JSONObject;
 public interface IMenuDAO {
 
 	JSONObject getMenu();
+	JSONObject getSubmenu(int submenuID);
 }

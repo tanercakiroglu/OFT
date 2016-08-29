@@ -6,6 +6,39 @@ public class Menu {
 	
 	
 	
+	
+	public String getDescEN() {
+		return descEN;
+	}
+
+	public void setDescEN(String descEN) {
+		this.descEN = descEN;
+	}
+
+	public String getNameEN() {
+		return nameEN;
+	}
+
+	public void setNameEN(String nameEN) {
+		this.nameEN = nameEN;
+	}
+
+	public double getPriceUSD() {
+		return priceUSD;
+	}
+
+	public void setPriceUSD(double priceUSD) {
+		this.priceUSD = priceUSD;
+	}
+
+	public double getPriceEUR() {
+		return priceEUR;
+	}
+
+	public void setPriceEUR(double priceEUR) {
+		this.priceEUR = priceEUR;
+	}
+
 	public String getDesc() {
 		return desc;
 	}
@@ -38,6 +71,10 @@ public class Menu {
 		this.submenu = submenu;
 	}
 
+	private String descEN;
+	
+	private String nameEN;
+	
 	private String desc ;
 	
 	private double price ;
@@ -45,5 +82,10 @@ public class Menu {
 	private String name ;
 	
 	private String submenu;
+	
+	private double priceUSD ;
+	
+	private double priceEUR ;
+	
 
 }

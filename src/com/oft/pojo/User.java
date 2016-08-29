@@ -12,14 +12,48 @@ public class User implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public User(String name,String username, String password) {
-		this.name = name;
-		this.uname = username;
-		this.pass = password;
+	
+		
+
+	public String getMiddleName() {
+		return middleName;
 	}
-	
-	public User (){}
-	
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public int getRoomNO() {
+		return roomNO;
+	}
+
+	public void setRoomNO(int roomNO) {
+		this.roomNO = roomNO;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public String getName() {
 		return name;
@@ -30,31 +64,18 @@ public class User implements Serializable {
 	}
 
  		
-
-	public String getUname() {
-		return uname;
-	}
-
-
-	public void setUname(String uname) {
-		this.uname = uname;
-	}
-
-
-	public String getPass() {
-		return pass;
-	}
-
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-
 	
 	String name;
 	
-	String uname;
+	String middleName;
+	
+	String lastName;
+	
+	String userName;
+	
+	int roomNO;
 
-	String pass;
+	String password;
+	
 
 }

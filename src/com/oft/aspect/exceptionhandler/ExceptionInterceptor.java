@@ -4,6 +4,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 
+import com.oft.excpetion.BusinessException;
 import com.oft.util.Util;
 
 @Aspect
@@ -18,7 +19,9 @@ public class ExceptionInterceptor {
 		try {
 			ret = joinPoint.proceed();
 			return ret;
-		} catch (Exception ex) {
+		}catch(BusinessException bex){
+			return	Util.constructJSON("fail",bex.getMessage() ,false);
+		}catch (Exception ex) {
 		    return	Util.constructJSON("fail",ex.getStackTrace() ,false);
 		}
 		

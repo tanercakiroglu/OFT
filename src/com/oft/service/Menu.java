@@ -2,7 +2,9 @@ package com.oft.service;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -30,5 +32,15 @@ public class Menu {
 			return  menuDAO.getMenu() ;
 			
 		}
+	    
+	    @Path("/getsubmenu/{id}")  
+	    @POST
+	    @Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
+		@Loggable(message=Constants.MENU_SERVICE_GET_MENU_LOG_ALIAS)
+	    public JSONObject getSubmenu(@PathParam("id") int submenuID){
+		   
+	    	return menuDAO.getSubmenu(submenuID);
+	   }
 
 }
