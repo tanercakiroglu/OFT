@@ -7,6 +7,14 @@ public class MenuPojo {
 	
 	
 	
+	public int getItemCount() {
+		return itemCount;
+	}
+
+	public void setItemCount(int itemCount) {
+		this.itemCount = itemCount;
+	}
+
 	public String getID() {
 		return ID;
 	}
@@ -96,6 +104,8 @@ public class MenuPojo {
 	private double priceEUR ;
 	
 	private String ID;
+	
+	private int itemCount;
 	
 
 }

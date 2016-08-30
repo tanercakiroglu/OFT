@@ -31,6 +31,7 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 			menu.setPriceUSD(rs.getDouble("PRICE_IN_DOLAR"));
 			menu.setDescEN(rs.getString("DESCRIPTION_EN"));
 			menu.setNameEN(rs.getString("ITEM_NAME_EN"));
+			menu.setItemCount(rs.getInt("ITEM_COUNT"));
 			
 			return menu;
 		}
@@ -85,13 +86,15 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 	@Override
 	public List<MenuPojo> getOrder(int roomNO) {
 	
-		String query = "SELECT  oft.item_count, me.ITEM_NAME_EN,  me.ITEM_NAME,  me.PRICE_IN_DOLAR,  me.PRICE_IN_YTL,  me.PRICE_IN_EURO,"+
-      "me.DESCRIPTION,  me.DESCRIPTION_EN FROM OFT_ORDER o,  menu me,  oft_order_detail oft WHERE oft.ORDER_ID=o.ID and oft.order_id = (SELECT id FROM oft_order WHERE room_no=:roomNO AND session_status=:sessionStatus )"+
-      "AND me.ID=oft.ITEM_ID";
-		Map<String,Object> parameters= new HashMap<String, Object>();
-		parameters.put("roomNO",roomNO);
+		String query = "SELECT  oft.item_count, me.ITEM_NAME_EN,  me.ITEM_NAME,  me.PRICE_IN_DOLAR,  me.PRICE_IN_YTL,  me.PRICE_IN_EURO,"
+				+ " me.DESCRIPTION,  me.DESCRIPTION_EN FROM OFT_ORDER o,  menu me,  oft_order_detail oft " 
+				+ " WHERE  oft.ORDER_ID=o.ID " 
+				+ " AND oft.order_id = (SELECT id FROM oft_order WHERE room_no=:roomNO AND session_status=:sessionStatus )"
+				+ " AND me.ID=oft.ITEM_ID";
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("roomNO", roomNO);
 		parameters.put("sessionStatus", 1);
-		List<MenuPojo> orderDetail =  namedParameterJdbcTemplate.query(query, parameters,rowMapperMenuDetail);
+		List<MenuPojo> orderDetail = namedParameterJdbcTemplate.query(query,parameters, rowMapperMenuDetail);
 		return orderDetail;
 	}
 	
@@ -110,14 +113,12 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 			
 		List<OrderPojo> order =  namedParameterJdbcTemplate.query(query, parameters,rowMapperOrder);
 		if(order!=null && order.size()==1)
-		{
 			return order.get(0);
-		}
-		else if(order==null || order.size()==0){
+		else if(order==null || order.size()==0)
 			return null;
-		}else{
+		else
 			throw new BusinessException("hacı database karışık soyleyim");
-		}
+		
 		
 	}
 
@@ -142,9 +143,9 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 		parameters.put("orderID", Integer.parseInt(orderID));
 		List<OrderDetailPojo> orderDetail =  namedParameterJdbcTemplate.query(query, parameters,rowMapperOrderDetail);
 		if(orderDetail!=null && orderDetail.size()==1)
-		{
 			return orderDetail.get(0).getItemCount();
-		}
+		
+		//TODO ELSE MUST BE HANDLED
 		return 0;
 	}
 
@@ -176,26 +177,4 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 }
 
 
-// ; 
-//String query = "SELECT  me.ITEM_NAME_EN, me.ITEM_NAME,me.PRICE_IN_DOLAR,me.PRICE_IN_YTL,me.PRICE_IN_EURO,me.DESCRIPTION,me.DESCRIPTION_EN   FROM OFT_ORDER o,menu me where me.ID=o.ITEM_ID and o.ROOM_NO=:roomNO and o.SESSION_STATUS=:sessionStatus";
-//Map<String,Object> parameters= new HashMap<String, Object>();
-//parameters.put("roomNO",roomNO);
-//parameters.put("sessionStatus", 1);
-//	
-//List<Menu> userFromDB =  namedParameterJdbcTemplate.query(query, parameters,rowMapperOrder);
-//return Util.constructJSON(Constants.ORDER_SERVICE_GET_ORDER_DAO_ALIAS, true, userFromDB);
-//int isRowAffected=0;
-//String query = "DELETE FROM OFT_ORDER WHERE ROOM_NO=:roomNO and ITEM_ID=:itemID and SESSION_STATUS=:sessionStatus";
-//Map<String, Object> namedParameters = new HashMap<String, Object>();
-//namedParameters.put("roomNO",roomID);
-//namedParameters.put("itemID", itemID);
-//namedParameters.put("sessionStatus", 1);
-//isRowAffected=namedParameterJdbcTemplate.update(query, namedParameters);
-//return Util.constructJSON(Constants.ORDER_SERVICE_GET_ORDER_DAO_ALIAS, true,isRowAffected);
-//for (Order order : orderList) {
-//	String query = "INSERT INTO OFT_ORDER (ROOM_NO) VALUES (:roomNO)";
-//	Map<String, Object> namedParameters = new HashMap<String, Object>();
-//	namedParameters.put("roomNO",order.getRoomNO());
-//	isRowAffected=namedParameterJdbcTemplate.update(query, namedParameters);		
-//} 
 
