@@ -1,5 +1,7 @@
 package com.oft.util;
 
+import java.util.TimeZone;
+
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -59,5 +61,14 @@ public class Util {
            obj=null;
         }
         return obj;
+    }
+    
+    public static java.sql.Timestamp getCurrentTimeStamp() {
+
+    	java.util.Date today = new java.util.Date();
+    	TimeZone.setDefault(TimeZone.getTimeZone("Europe/Istanbul"));
+    	
+    	return new java.sql.Timestamp(today.getTime());
+
     }
 }

@@ -89,4 +89,15 @@ public class Order {
 			
 		}
 
+	    @Path("/close/{roomNO}")  
+	    @POST
+	    @Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
+		@Loggable(message="/ORDER/GIVEORDER")
+	    @HandleException(handleExcpetion=Constants.ORDER_SERVICE_GET_ORDER_DAO_ALIAS)
+		public JSONObject closeOrder(@PathParam("roomNO") int roomNO) {
+	    	
+	    	return Util.constructJSON(Constants.ORDER_SERVICE_GET_ORDER_DAO_ALIAS, true,orderDAO.closeOrder(roomNO));
+	    }
+	    	
 }

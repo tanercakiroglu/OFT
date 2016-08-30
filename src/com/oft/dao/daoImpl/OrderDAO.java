@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jettison.json.JSONObject;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.oft.dao.BaseJdbcDAO;
@@ -15,6 +14,7 @@ import com.oft.excpetion.BusinessException;
 import com.oft.pojo.MenuPojo;
 import com.oft.pojo.OrderDetailPojo;
 import com.oft.pojo.OrderPojo;
+import com.oft.util.Util;
 
 public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 
@@ -43,11 +43,8 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 			public OrderPojo mapRow(ResultSet rs, int rowNum) throws SQLException {
 				OrderPojo order = new OrderPojo();
 				order.setID(rs.getString("ID"));
-				
-				
 				return order;
 			}
-			 
 		 };
 		 
 			private final RowMapper<OrderDetailPojo> rowMapperOrderDetail = new RowMapper<OrderDetailPojo>(){
@@ -58,11 +55,9 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 					orderDetail.setOrderID(rs.getString("ID"));
 					orderDetail.setItemCount(rs.getInt("ITEM_COUNT"));
 					orderDetail.setItemID(rs.getInt("ITEM_ID"));
-					
 					return orderDetail;
 				}
 			 };
-	
 	
 	@Override
 	public int addOrderDetail(List<OrderPojo> orderList,String orderID) {
@@ -76,10 +71,8 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 		namedParameters.put("orderID",orderID);
 		namedParameterJdbcTemplate.update(query, namedParameters);		
 		isRowAffected++;
-	} 
-		
+		} 
 		return isRowAffected;
-			
 	}
 
 
@@ -100,12 +93,20 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 	
 
 	@Override
-	public JSONObject closeOrder(int roomNO) {
-		// TODO Auto-generated method stub
-		return null;
+	public int closeOrder(int roomNO) {
+		
+		int rowAffected =0;
+		String query = "UPDATE OFT_ORDER set session_Status=:sessionStatus, order_session_closed_date=:timestamp  where ROOM_NO=:roomNO";
+		Map<String,Object> parameters= new HashMap<String, Object>();
+		parameters.put("roomNO",roomNO);
+		parameters.put("timestamp", Util.getCurrentTimeStamp());
+		parameters.put("sessionStatus",0);
+		rowAffected=namedParameterJdbcTemplate.update(query, parameters);
+		return rowAffected;
 	}
 	
 	public OrderPojo controlExistingOpenOrder(int roomNO) throws BusinessException{
+	
 		String query = "SELECT * from OFT_ORDER WHERE ROOM_NO=:roomNO and SESSION_STATUS=:sessionStatus";
 		Map<String,Object> parameters= new HashMap<String, Object>();
 		parameters.put("roomNO",roomNO);
@@ -118,13 +119,11 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 			return null;
 		else
 			throw new BusinessException("hacı database karışık soyleyim");
-		
-		
 	}
-
 
 	@Override
 	public int addOrder(int roomNO) {
+	
 		int rowAffected =0;
 		String query = "INSERT INTO  OFT_ORDER (ROOM_NO) VALUES(:roomNO)";
 		Map<String,Object> parameters= new HashMap<String, Object>();
@@ -135,7 +134,8 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 
 
 	@Override
-	public int controlDeleteCount(int itemID, String orderID) {
+	public int controlDeleteCount(int itemID, String orderID) throws BusinessException {
+		
 		String query = "select * from oft_order_detail where item_id =:itemID and order_id=:orderID";
 		Map<String,Object> parameters= new HashMap<String, Object>();
 		System.out.println(itemID + Integer.parseInt(orderID));
@@ -144,12 +144,9 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 		List<OrderDetailPojo> orderDetail =  namedParameterJdbcTemplate.query(query, parameters,rowMapperOrderDetail);
 		if(orderDetail!=null && orderDetail.size()==1)
 			return orderDetail.get(0).getItemCount();
-		
-		//TODO ELSE MUST BE HANDLED
-		return 0;
+		else
+			throw new BusinessException("hacı database karışık soyleyim");
 	}
-
-
 	
 	@Override
 	public int deleteOrderDetail(int itemID,String orderID) {
@@ -162,8 +159,10 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 		rowAffected=namedParameterJdbcTemplate.update(query, namedParameters);
 		return rowAffected ;
 	}
+	
 	@Override
 	public int decreaseItemCount(int itemID, String orderID) {
+		
 		int rowAffected = 0;
 		String query = "UPDATE  OFT_ORDER_DETAIL SET ITEM_COUNT=ITEM_COUNT-1 WHERE ORDER_ID=:orderID and ITEM_ID=:itemID";
 		Map<String, Object> namedParameters = new HashMap<String, Object>();
@@ -172,8 +171,8 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 		rowAffected=namedParameterJdbcTemplate.update(query, namedParameters);
 		return rowAffected ;
 	}
-
-
+	
+	
 }
 
 
