@@ -18,6 +18,7 @@ import com.oft.aspect.logger.Loggable;
 import com.oft.dao.idao.IMenuDAO;
 import com.oft.excpetion.BusinessException;
 import com.oft.pojo.MenuPojo;
+import com.oft.pojo.SubmenuPojo;
 import com.oft.util.Constants;
 import com.oft.util.Util;
 
@@ -41,6 +42,19 @@ public class Menu {
 			
 			
 		}
+	    
+	    @Path("/getsubmenulist")  
+	    @GET
+	    @Consumes(MediaType.APPLICATION_JSON)
+		@Produces(MediaType.APPLICATION_JSON)
+		@Loggable(message=Constants.MENU_SERVICE_GET_MENU_LOG_ALIAS)
+	    @HandleException(handleExcpetion=Constants.MENU_SERVICE_GET_MENU_LOG_ALIAS)
+	    public JSONObject getSubmenulist()throws BusinessException{
+		   
+	    	List<SubmenuPojo> submenu= menuDAO.getSubmenuList();
+	    	return Util.constructJSON(Constants.MENU_SERVICE_GET_MENU_DAO_ALIAS, true, submenu);
+	    	
+	   }
 	    
 	    @Path("/getsubmenu/{id}")  
 	    @POST

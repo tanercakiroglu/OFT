@@ -11,6 +11,8 @@ public class Constants {
 	public final static String LOGIN_FAILED="Login failed.You are not registered to our system. ";
 	public final static String INVALID_PARAMETERS="Invalid paramaters.";
 	public final static String DELETE_BUSSINES_EXCEPTION="No valid order to delete";
+	public final static String SUCCESSFUL_LOGIN="Login successfully";
+	public final static String SUCCESSFUL_REGISTIRATION="Registered successfully";
 	
 	
 }

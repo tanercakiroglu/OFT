@@ -10,7 +10,8 @@ public class ApplicationRequestFilter  implements ContainerRequestFilter{
 
 	@Context
 	private HttpServletRequest servletRequest;
-
+	
+	
 	@Override
 	public ContainerRequest filter(ContainerRequest request) {
 		
@@ -19,9 +20,9 @@ public class ApplicationRequestFilter  implements ContainerRequestFilter{
 			   ipAddress = servletRequest.getRemoteAddr();
 		}
 		
-		if("/OFT/user/getuser".equalsIgnoreCase(request.getRequestUri().getPath())){
+		if(request !=null &&  request.getRequestUri()!=null && (request.getRequestUri().getPath()!=null)
+				&& !(request.getRequestUri().getPath().contains("login"))){
 			
-			System.out.println("sadasd");
 		}
 		return request;
 	}

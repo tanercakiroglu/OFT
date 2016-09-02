@@ -64,7 +64,7 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 		
 		int isRowAffected=0;
 		for (OrderPojo order : orderList) {
-		String query = "INSERT INTO OFT_ORDER_DETAIL (ORDER_ID,ITEM_ID,ITEM_COUNT) VALUES (:orderID,:itemID,:itemCount)";
+		String query = "INSERT INTO oft_order_detail (ORDER_ID,ITEM_ID,ITEM_COUNT) VALUES (:orderID,:itemID,:itemCount)";
 		Map<String, Object> namedParameters = new HashMap<String, Object>();
 		namedParameters.put("itemID",order.getItemID());
 		namedParameters.put("itemCount",order.getItemCount());
@@ -96,7 +96,7 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 	public int closeOrder(int roomNO) {
 		
 		int rowAffected =0;
-		String query = "UPDATE OFT_ORDER set session_Status=:sessionStatus, order_session_closed_date=:timestamp  where ROOM_NO=:roomNO";
+		String query = "UPDATE oft_order set session_Status=:sessionStatus, order_session_closed_date=:timestamp  where ROOM_NO=:roomNO";
 		Map<String,Object> parameters= new HashMap<String, Object>();
 		parameters.put("roomNO",roomNO);
 		parameters.put("timestamp", Util.getCurrentTimeStamp());
@@ -107,7 +107,7 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 	
 	public OrderPojo controlExistingOpenOrder(int roomNO) throws BusinessException{
 	
-		String query = "SELECT * from OFT_ORDER WHERE ROOM_NO=:roomNO and SESSION_STATUS=:sessionStatus";
+		String query = "SELECT * from oft_order WHERE ROOM_NO=:roomNO and SESSION_STATUS=:sessionStatus";
 		Map<String,Object> parameters= new HashMap<String, Object>();
 		parameters.put("roomNO",roomNO);
 		parameters.put("sessionStatus", 1);
@@ -125,7 +125,7 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 	public int addOrder(int roomNO) {
 	
 		int rowAffected =0;
-		String query = "INSERT INTO  OFT_ORDER (ROOM_NO) VALUES(:roomNO)";
+		String query = "INSERT INTO  oft_order (ROOM_NO) VALUES(:roomNO)";
 		Map<String,Object> parameters= new HashMap<String, Object>();
 		parameters.put("roomNO",roomNO);
 		rowAffected=namedParameterJdbcTemplate.update(query, parameters);
@@ -152,7 +152,7 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 	public int deleteOrderDetail(int itemID,String orderID) {
 		
 		int rowAffected = 0;
-		String query = "DELETE FROM OFT_ORDER_DETAIL WHERE ORDER_ID=:orderID and ITEM_ID=:itemID";
+		String query = "DELETE FROM oft_order_detail WHERE ORDER_ID=:orderID and ITEM_ID=:itemID";
 		Map<String, Object> namedParameters = new HashMap<String, Object>();
 		namedParameters.put("orderID",orderID);
 		namedParameters.put("itemID", itemID);
@@ -164,7 +164,7 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 	public int decreaseItemCount(int itemID, String orderID) {
 		
 		int rowAffected = 0;
-		String query = "UPDATE  OFT_ORDER_DETAIL SET ITEM_COUNT=ITEM_COUNT-1 WHERE ORDER_ID=:orderID and ITEM_ID=:itemID";
+		String query = "UPDATE  oft_order_detail SET ITEM_COUNT=ITEM_COUNT-1 WHERE ORDER_ID=:orderID and ITEM_ID=:itemID";
 		Map<String, Object> namedParameters = new HashMap<String, Object>();
 		namedParameters.put("orderID",orderID);
 		namedParameters.put("itemID", itemID);

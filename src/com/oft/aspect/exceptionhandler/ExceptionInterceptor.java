@@ -22,7 +22,8 @@ public class ExceptionInterceptor {
 		}catch(BusinessException bex){
 			return	Util.constructJSON("fail",bex.getMessage() ,false);
 		}catch (Exception ex) {
-		    return	Util.constructJSON("fail",ex.getStackTrace() ,false);
+			ex.printStackTrace();
+		    return	Util.constructJSON("fail",ex.getMessage() ,false);
 		}
 		
 	}

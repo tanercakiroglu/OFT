@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import com.oft.dao.BaseJdbcDAO;
 import com.oft.dao.idao.IMenuDAO;
 import com.oft.pojo.MenuPojo;
+import com.oft.pojo.SubmenuPojo;
 
 public class MenuDAO extends BaseJdbcDAO implements IMenuDAO {
 
@@ -22,8 +23,8 @@ public class MenuDAO extends BaseJdbcDAO implements IMenuDAO {
 			menu.setDesc(rs.getString("DESCRIPTION"));
 			menu.setPrice(rs.getDouble("PRICE_IN_YTL"));
 			menu.setName(rs.getString("ITEM_NAME"));
-			menu.setPriceEUR(rs.getDouble("PRICE_IN_EURO"));
-			menu.setPriceUSD(rs.getDouble("PRICE_IN_DOLAR"));
+			menu.setPriceEUR(rs.getDouble("PRICE_IN_EUR"));
+			menu.setPriceUSD(rs.getDouble("PRICE_IN_USD"));
 			menu.setDescEN(rs.getString("DESCRIPTION_EN"));
 			menu.setNameEN(rs.getString("ITEM_NAME_EN"));
 			menu.setSubmenu(rs.getString("SUBMENU"));
@@ -33,22 +34,42 @@ public class MenuDAO extends BaseJdbcDAO implements IMenuDAO {
 		}
 		 
 	 };
+	 
+	 private final RowMapper<SubmenuPojo> rowMapperSubMenu = new RowMapper<SubmenuPojo>(){
+
+			@Override
+			public SubmenuPojo mapRow(ResultSet rs, int rowNum) throws SQLException {
+				SubmenuPojo submenu = new SubmenuPojo();
+
+				submenu.setId(rs.getString("id"));
+				submenu.setName(rs.getString("NAME"));
+				
+				return submenu;
+			}
+			 
+		 };
 	
 	@Override
 	public List<MenuPojo> getMenu() {
 	
-		String query = "select  submenu_t.NAME as SUBMENU,menu_t.ID,menu_t.ITEM_NAME,menu_t.ITEM_NAME_EN,menu_t.DESCRIPTION_EN,menu_t.PRICE_IN_YTL,menu_t.PRICE_IN_DOLAR,menu_t.PRICE_IN_EURO,menu_t.DESCRIPTION from menu menu_t ,submenu submenu_t where menu_t.SUBMENU_ID=submenu_t.ID";
+		String query = "select  submenu_t.NAME as SUBMENU,menu_t.ID,menu_t.ITEM_NAME,menu_t.ITEM_NAME_EN,menu_t.DESCRIPTION_EN,menu_t.PRICE_IN_YTL,menu_t.PRICE_IN_USD,menu_t.PRICE_IN_EUR,menu_t.DESCRIPTION from menu menu_t ,submenu submenu_t where menu_t.SUBMENU_ID=submenu_t.ID";
 		return  jdbcTemplate.query(query,rowMapperMenu);
 	}
 	
 	@Override
 	public List<MenuPojo> getSubmenu(int submenuID) {
-	    String query = "select  submenu_t.NAME as SUBMENU,menu_t.ID,menu_t.ITEM_NAME,menu_t.ITEM_NAME_EN,menu_t.DESCRIPTION_EN,menu_t.PRICE_IN_YTL,menu_t.PRICE_IN_DOLAR,menu_t.PRICE_IN_EURO,menu_t.DESCRIPTION from menu menu_t ,submenu submenu_t where menu_t.SUBMENU_ID=submenu_t.ID and submenu_t.ID=:submenuID";
+	    String query = "select  submenu_t.NAME as SUBMENU,menu_t.ID,menu_t.ITEM_NAME,menu_t.ITEM_NAME_EN,menu_t.DESCRIPTION_EN,menu_t.PRICE_IN_YTL,menu_t.PRICE_IN_USD,menu_t.PRICE_IN_EUR,menu_t.DESCRIPTION from menu menu_t ,submenu submenu_t where menu_t.SUBMENU_ID=submenu_t.ID and submenu_t.ID=:submenuID";
 		Map<String,Object> parameters= new HashMap<String, Object>();
 		parameters.put("submenuID",submenuID);
 					
 		return namedParameterJdbcTemplate.query(query, parameters,rowMapperMenu);
 		
+	}
+
+	@Override
+	public List<SubmenuPojo> getSubmenuList() {
+		String query="select * from submenu";
+		return  jdbcTemplate.query(query,rowMapperSubMenu);
 	}
 	
 	
