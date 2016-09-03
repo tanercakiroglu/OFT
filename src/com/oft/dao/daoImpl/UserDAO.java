@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -62,9 +63,24 @@ public class UserDAO extends BaseJdbcDAO implements IUserDAO {
 
 
 	@Override
-	public int asda() {
-		// TODO Auto-generated method stub
-		return 0;
+	public String updateToken(int roomNO,boolean isLogin) {
+		
+		UUID token =null;
+		String query = "update oft_user set token=:token where ROOM_NO=:roomNO";
+		Map<String, Object> namedParameters = new HashMap<String, Object>();
+		
+		if(isLogin)
+		token= UUID.randomUUID();
+		
+		namedParameters.put("token", token == null? null : token.toString());
+		namedParameters.put("roomNO", roomNO);
+		namedParameterJdbcTemplate.update(query, namedParameters);
+		
+		return token == null? null : token.toString();
 	}
+
+
+
+
 
 }

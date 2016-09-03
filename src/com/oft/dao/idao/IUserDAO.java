@@ -12,6 +12,6 @@ public interface IUserDAO {
 	
 	int register(UserPojo user)throws BusinessException ;
 	
-	int asda();
+	String updateToken(int roomNO,boolean isLogin);
  
 }
