@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class ConnectionManager {
 	
 //	private static String url = "jdbc:oracle:thin:@localhost:1521:orcl";    
-//    private static String driverName = "oracle.jdbc.driver.OracleDriver";  
+//  private static String driverName = "oracle.jdbc.driver.OracleDriver";  
 	private static String url = "jdbc:mysql://127.0.0.1:3307/oft";    
     private static String driverName = "com.mysql.jdbc.Driver";   
     private final static String usernsme = "taner";   

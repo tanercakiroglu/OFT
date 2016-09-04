@@ -64,13 +64,24 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 		
 		int isRowAffected=0;
 		for (OrderPojo order : orderList) {
-		String query = "INSERT INTO oft_order_detail (ORDER_ID,ITEM_ID,ITEM_COUNT) VALUES (:orderID,:itemID,:itemCount)";
-		Map<String, Object> namedParameters = new HashMap<String, Object>();
-		namedParameters.put("itemID",order.getItemID());
-		namedParameters.put("itemCount",order.getItemCount());
-		namedParameters.put("orderID",orderID);
-		namedParameterJdbcTemplate.update(query, namedParameters);		
-		isRowAffected++;
+		if(controlExistingOrderDetail(orderID,order.getItemID())==null){
+				String query = "INSERT INTO oft_order_detail (ORDER_ID,ITEM_ID,ITEM_COUNT) VALUES (:orderID,:itemID,:itemCount)";
+				Map<String, Object> namedParameters = new HashMap<String, Object>();
+				namedParameters.put("itemID", order.getItemID());
+				namedParameters.put("itemCount", order.getItemCount());
+				namedParameters.put("orderID", orderID);
+				namedParameterJdbcTemplate.update(query, namedParameters);
+				isRowAffected++;
+		}
+		else {
+				String query = "update oft_order_detail set ITEM_COUNT=ITEM_COUNT + :itemCount WHERE ORDER_ID=:orderID and ITEM_ID=:itemID";
+				Map<String, Object> namedParameters = new HashMap<String, Object>();
+				namedParameters.put("itemID", order.getItemID());
+				namedParameters.put("itemCount", order.getItemCount());
+				namedParameters.put("orderID", orderID);
+				namedParameterJdbcTemplate.update(query, namedParameters);
+				isRowAffected++;
+		}
 		} 
 		return isRowAffected;
 	}
@@ -170,6 +181,20 @@ public class OrderDAO extends BaseJdbcDAO implements IOrderDAO {
 		namedParameters.put("itemID", itemID);
 		rowAffected=namedParameterJdbcTemplate.update(query, namedParameters);
 		return rowAffected ;
+	}
+	
+	private String controlExistingOrderDetail(String orderID,int itemID){
+		
+		String query = "select * from oft_order_detail where ORDER_ID =:orderID and ITEM_ID=:itemID";
+		Map<String, Object> namedParameters = new HashMap<String, Object>();
+		namedParameters.put("orderID",orderID);
+		namedParameters.put("itemID", itemID);
+		List<OrderDetailPojo> list=namedParameterJdbcTemplate.query(query, namedParameters,rowMapperOrderDetail);
+	    if(list!= null && list.size()==1)
+	    	return list.get(0).getOrderID();
+	    return null;
+		
+		
 	}
 	
 	
