@@ -12,9 +12,6 @@ public class UserPojo implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
-		
-
 	public String getMiddleName() {
 		return middleName;
 	}
@@ -59,23 +56,20 @@ public class UserPojo implements Serializable {
 		return name;
 	}
 
- 	public void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
- 		
-	
 	String name;
-	
+
 	String middleName;
-	
+
 	String lastName;
-	
+
 	String userName;
-	
+
 	int roomNO;
 
 	String password;
-	
 
 }

@@ -1,12 +1,7 @@
 package com.oft.pojo;
 
 public class MenuPojo {
-	
-	
-	
-	
-	
-	
+
 	public int getItemCount() {
 		return itemCount;
 	}
@@ -88,24 +83,23 @@ public class MenuPojo {
 	}
 
 	private String descEN;
-	
+
 	private String nameEN;
-	
-	private String desc ;
-	
-	private double price ;
-	
-	private String name ;
-	
+
+	private String desc;
+
+	private double price;
+
+	private String name;
+
 	private String submenu;
-	
-	private double priceUSD ;
-	
-	private double priceEUR ;
-	
+
+	private double priceUSD;
+
+	private double priceEUR;
+
 	private String ID;
-	
+
 	private int itemCount;
-	
 
 }

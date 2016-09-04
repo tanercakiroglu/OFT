@@ -5,13 +5,13 @@ import java.util.List;
 import com.oft.excpetion.BusinessException;
 import com.oft.pojo.UserPojo;
 
-
 public interface IUserDAO {
 
-	List<UserPojo> login(String username,String password,String roomNO) throws BusinessException;
-	
-	int register(UserPojo user)throws BusinessException ;
-	
-	String updateToken(int roomNO,boolean isLogin);
- 
+	List<UserPojo> login(String username, String password, String roomNO)
+			throws BusinessException;
+
+	int register(UserPojo user) throws BusinessException;
+
+	String updateToken(int roomNO, boolean isLogin);
+
 }

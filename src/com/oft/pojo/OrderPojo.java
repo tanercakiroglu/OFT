@@ -4,8 +4,6 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderPojo {
-	
-    
 
 	public int getItemID() {
 		return itemID;
@@ -23,7 +21,6 @@ public class OrderPojo {
 		ID = iD;
 	}
 
-
 	public int getItemCount() {
 		return itemCount;
 	}
@@ -32,15 +29,10 @@ public class OrderPojo {
 		this.itemCount = itemCount;
 	}
 
-
-
-
 	private String ID;
-	
+
 	private int itemID;
-	
+
 	private int itemCount;
-	
-	
 
 }

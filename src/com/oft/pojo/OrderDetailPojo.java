@@ -1,10 +1,7 @@
 package com.oft.pojo;
 
 public class OrderDetailPojo {
-	
-	
-	
-	
+
 	public String getOrderID() {
 		return orderID;
 	}
@@ -30,11 +27,9 @@ public class OrderDetailPojo {
 	}
 
 	private String orderID;
-	
+
 	private int itemID;
-	
+
 	private int itemCount;
-	
-	
 
 }
