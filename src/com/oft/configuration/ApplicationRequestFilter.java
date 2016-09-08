@@ -19,9 +19,8 @@ public class ApplicationRequestFilter implements ContainerRequestFilter {
 			ipAddress = servletRequest.getRemoteAddr();
 		}
 
-		if (request != null && request.getRequestUri() != null
-				&& (request.getRequestUri().getPath() != null)
-				&& !(request.getRequestUri().getPath().contains("login"))) {
+        if (!(request.getRequestUri().getPath().contains("login") || request.getRequestUri().getPath().contains("register"))) {
+
 
 			int rs = ConnectionManager.selectUser(request
 					.getHeaderValue("authorization"));
